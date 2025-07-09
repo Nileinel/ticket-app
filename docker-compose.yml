@@ -1,0 +1,66 @@
+services:
+  mongodb:
+    build: ./docker/mongodb
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: ${MONGO_DATABASE}
+    volumes:
+      - mongodb_data:/data/db
+
+  elasticsearch:
+    build: ./docker/elasticsearch
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xmx2048m -Xms2048m
+    ports:
+      - "9200:9200"
+    volumes:
+      - esdata:/usr/share/elasticsearch/data
+
+  kibana:
+    build: ./docker/kibana
+    container_name: kibana
+    ports:
+      - "5601:5601"
+    depends_on:
+      - elasticsearch
+  
+  # monstache:
+  #   build: ./docker/monstache
+  #   container_name: monstache
+  #   environment:
+  #     - MONSTACHE_ES_USER=${ELASTIC_USER}
+  #     - MONSTACHE_ES_PASS=${ELASTIC_PASSWORD}
+  #     - MONSTACHE_MONGO_URL=${MONGO_URI}
+  #   volumes:
+  #     - monstachedata:/monstache/
+  #   depends_on:
+  #     - mongodb
+  #   networks:
+  #     - db
+  #     - elk
+  #   env_file:
+  #     - .env
+
+  server:
+    build: ./server
+    container_name: ticket-app-backend
+    ports:
+      - "3333:3333"
+    depends_on:
+      - mongodb
+      - elasticsearch
+      # - monstache
+    environment:
+      - MONGO_URI=${MONGO_URI}
+      - ELASTIC_URI=${ELASTIC_URI}
+    volumes:
+      - ./server:/usr/src/app
+
+volumes:
+  mongodb_data:
+  esdata:
+  # monstachedata:
