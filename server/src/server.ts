@@ -2,6 +2,7 @@ import * as dotenv from 'dotenv';
 import express from 'express';
 import cors from 'cors';
 import { connectToDatabase } from './services/db.service';
+import { ticketRouter } from './routes/ticket.routes';
 
 dotenv.config({ path: '../.env' });
 
@@ -19,8 +20,7 @@ connectToDatabase(MONGO_URI).then(() => {
     app.use(cors());
     app.use(express.json());
 
-    // Routes
-    // app.use('/api/tickets', ticketRoutes);
+    app.use('/tickets', ticketRouter);
 
     app.listen(PORT, () => {
         console.log(`Server is running on http://localhost:${PORT}`);
