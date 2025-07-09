@@ -49,6 +49,7 @@
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/rose-red.css",
               "src/styles.css"
             ],
             "server": "src/main.server.ts",
@@ -98,5 +99,8 @@
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "710724b3-e2b7-4a70-8236-516b9a7d7f2e"
   }
 }
