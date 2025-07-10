@@ -13,12 +13,21 @@ services:
     build: ./docker/elasticsearch
     container_name: elasticsearch
     environment:
-      - discovery.type=single-node
+      - node.name=es01
       - ES_JAVA_OPTS=-Xmx2048m -Xms2048m
+      - bootstrap.memory_lock=true
+      - ELASTIC_PASSWORD=${ELASTICSEARCH_PASSWORD}
     ports:
       - "9200:9200"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
     volumes:
       - esdata:/usr/share/elasticsearch/data
+      - ./docker/elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+    networks: 
+      - elk
 
   kibana:
     build: ./docker/kibana
@@ -27,13 +36,34 @@ services:
       - "5601:5601"
     depends_on:
       - elasticsearch
+      - setup-users
+    environment:
+      - ELASTICSEARCH_USERNAME=${KIBANA_USERNAME}
+      - ELASTICSEARCH_PASSWORD=${KIBANA_PASSWORD}
+      - XPACK_ENCRYPTED_SESSION_KEY=${XPACK_ENCRYPTED_SESSION_KEY}
+    networks:
+      - elk
+    volumes: 
+      - ./docker/kibana/kibana.yml:/usr/share/kibana/config/kibana.yml
+  
+  setup-users:
+    build:
+      context: ./docker/setup
+      args:
+        ELASTICSEARCH_PASSWORD: ${ELASTICSEARCH_PASSWORD}
+        KIBANA_PASSWORD: ${KIBANA_PASSWORD}
+        ES_URL: ${ELASTIC_URI}
+    depends_on:
+      - elasticsearch
+    networks:
+      - elk
   
   # monstache:
   #   build: ./docker/monstache
   #   container_name: monstache
   #   environment:
-  #     - MONSTACHE_ES_USER=${ELASTIC_USER}
-  #     - MONSTACHE_ES_PASS=${ELASTIC_PASSWORD}
+  #     - MONSTACHE_ES_USER=${ELASTICSEARCH_USERNAME}
+  #     - MONSTACHE_ES_PASS=${ELASTICSEARCH_PASSWORD}
   #     - MONSTACHE_MONGO_URL=${MONGO_URI}
   #   volumes:
   #     - monstachedata:/monstache/
@@ -61,6 +91,10 @@ services:
     volumes:
       - ./server:/usr/src/app
 
+networks: 
+  elk:
+    driver: bridge
+  
 volumes:
   mongodb_data:
   esdata:
