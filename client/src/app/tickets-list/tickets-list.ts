@@ -20,6 +20,9 @@ import { MatCardModule } from '@angular/material/card';
       .mat-mdc-card {
         margin: 2rem auto;
         max-width: 800px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding: 1rem;
       }
       .mat-mdc-card-header {
         display: flex;
@@ -45,7 +48,7 @@ import { MatCardModule } from '@angular/material/card';
     <mat-card>
       <br />
       <mat-card-header>
-        <mat-card-title>Tickets List</mat-card-title>
+        <mat-card-title>Tickets</mat-card-title>
       </mat-card-header>
       <br />
       <mat-card-content>
