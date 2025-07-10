@@ -2,12 +2,27 @@ services:
   mongodb:
     build: ./docker/mongodb
     container_name: mongodb
+    command: ["--replSet", "rs0"]
     ports:
       - "27017:27017"
     environment:
       MONGO_INITDB_DATABASE: ${MONGO_DATABASE}
     volumes:
       - mongodb_data:/data/db
+    networks: 
+      - elk
+  
+  mongo-init:
+    build: ./docker/mongodb
+    depends_on:
+      - mongodb
+    container_name: mongo-init
+    volumes: 
+      - ./docker/mongodb/init.sh:/init.sh
+      - ./docker/mongodb/init-replica.js:/init-replica.js
+    entrypoint: ["/init.sh"]
+    networks:
+      - elk
 
   elasticsearch:
     build: ./docker/elasticsearch
@@ -58,22 +73,28 @@ services:
     networks:
       - elk
   
-  # monstache:
-  #   build: ./docker/monstache
-  #   container_name: monstache
-  #   environment:
-  #     - MONSTACHE_ES_USER=${ELASTICSEARCH_USERNAME}
-  #     - MONSTACHE_ES_PASS=${ELASTICSEARCH_PASSWORD}
-  #     - MONSTACHE_MONGO_URL=${MONGO_URI}
-  #   volumes:
-  #     - monstachedata:/monstache/
-  #   depends_on:
-  #     - mongodb
-  #   networks:
-  #     - db
-  #     - elk
-  #   env_file:
-  #     - .env
+  monstache:
+    build: ./docker/monstache
+    container_name: monstache
+    entrypoint: ["/entrypoint.sh"]
+    volumes:
+      - monstachedata:/monstache/
+      - ./docker/monstache/config.toml.template:/config.toml.template
+      - ./docker/monstache/entrypoint.sh:/entrypoint.sh
+    environment: 
+      - MONGO_URI=${MONGO_URI}
+      - ELASTIC_URI=${ELASTIC_URI}
+      - ELASTICSEARCH_USERNAME=${ELASTICSEARCH_USERNAME}
+      - ELASTICSEARCH_PASSWORD=${ELASTICSEARCH_PASSWORD}
+      - MONGO_NS=${MONGO_NS}
+    depends_on:
+      - mongodb
+      - elasticsearch
+    networks:
+      - elk
+    command: ["-f", "/config.toml"]
+    env_file:
+      - .env
 
   server:
     build: ./server
@@ -90,6 +111,8 @@ services:
       - ELASTIC_URI=${ELASTIC_URI}
     volumes:
       - ./server:/usr/src/app
+    networks:
+      - elk
 
 networks: 
   elk:
@@ -98,4 +121,4 @@ networks:
 volumes:
   mongodb_data:
   esdata:
-  # monstachedata:
+  monstachedata:

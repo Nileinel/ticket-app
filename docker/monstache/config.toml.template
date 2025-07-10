@@ -1,0 +1,11 @@
+mongo-url = "${MONGO_URI}"
+elasticsearch-urls = ["${ELASTIC_URI}"]
+elasticsearch-user = "${ELASTICSEARCH_USERNAME}"
+elasticsearch-password = "${ELASTICSEARCH_PASSWORD}"
+
+change-stream-namespaces = ["${MONGO_NS}"]
+direct-read-namespaces = ["${MONGO_NS}"]
+
+resume = true
+gzip = true
+index-as-update = true
