@@ -50,7 +50,7 @@ import { MatCardModule } from '@angular/material/card';
         <table mat-table [dataSource]="tickets$()">
           <ng-container matColumnDef="col-id">
             <th mat-header-cell *matHeaderCellDef> ID </th>
-            <td mat-cell *matCellDef="let ticket"> {{ticket.id}} </td>
+            <td mat-cell *matCellDef="let ticket"> {{ticket._id}} </td>
           </ng-container>
 
           <ng-container matColumnDef="col-name">
