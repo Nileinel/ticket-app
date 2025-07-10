@@ -1,1 +1,66 @@
-# ticket-app
+# Ticket Management App - MEAN Stack Demo
+
+A demo application for viewing, creating and editing tickets, built with the MEAN stack (MongoDB, Express.js, Angular, Node.js).
+
+## Features
+
+- Create, view, update, and delete tickets
+
+## Tech Stack
+
+- **Frontend:** Angular
+- **Backend:** Node.js, Express.js
+- **Database:** MongoDB
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js & npm & Angular CLI 
+- Docker: docker-compose
+
+### Installation
+
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/yourusername/ticket-app.git
+    cd ticket-app
+    ```
+
+2. Install backend dependencies:
+    ```bash
+    cd server
+    npm install
+    ```
+
+3. Install frontend dependencies:
+    ```bash
+    cd ../client
+    npm install
+    ```
+
+### Running the App
+
+1. Start backend services w/ Docker (from project root directory):
+    ```bash
+    docker-compose up -d
+    ```
+
+2. Start the Angular frontend:
+    ```bash
+    cd ../client
+    ng serve -o
+    ```
+
+4. Visit `http://localhost:4200` in your browser.
+
+## Folder Structure
+
+```
+ticket-app/
+  server/
+  client/
+  docker/
+  README.md
+  docker-compose.yml
+```
