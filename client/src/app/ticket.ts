@@ -1,4 +1,4 @@
 export interface Ticket {
-    id?: string,
+    _id?: string,
     name: string
 }
