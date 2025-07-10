@@ -55,7 +55,7 @@ A demo application for viewing, creating, editing and deleting tickets, built wi
     ng serve -o
     ```
 
-4. Visit `http://localhost:4200` in your browser.
+4. Visit `http://localhost:4200` in your browser. Kibana dashboard is accessible at `http://localhost:5601`.
 
 ## Folder Structure
 
