@@ -27,7 +27,7 @@ connectToDatabase(MONGO_URI).then(() => {
     app.use('/tickets', ticketRouter);
 
     app.listen(SERVER_PORT, () => {
-        console.log(`Server is running on http://localhost:${PORT}`);
+        console.log(`Server is running on http://localhost:${SERVER_PORT}`);
     });
 }).catch((error: any) => {
     console.error('Failed to connect to the database:', error);
