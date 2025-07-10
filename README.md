@@ -71,9 +71,7 @@ ticket-app/
 
 ### Known Vulnerabilities and Possible Improvements
 
-1. .env committed for replicability: should be avoided.
-2. Monstache authenticated for Elasticsearch using the elastic user (superuser) for ease: Should create a new Monstache user with appropriate permissions.
-3. Better passwords for Elasticsearch and Kibana users for security.
-4. Dockerise frontend for easier deployment.
-5. Add better authentication for MongoDB
+1. Monstache authenticated for Elasticsearch using the elastic user (superuser) for ease: Should create a new user with appropriate permissions for Monstache.
+2. Dockerise frontend for easier deployment.
+3. Add authentication for MongoDB.
 
