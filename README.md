@@ -14,6 +14,11 @@ A demo application for viewing, creating and editing tickets, built with the MEA
 - **Backend:** Node.js, Express.js
 - **Database:** MongoDB
 
+## In progress
+
+- **Elasticsearch** integration: search queries
+- **Kibana** dashboard
+
 ## Getting Started
 
 ### Prerequisites
