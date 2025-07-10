@@ -20,7 +20,22 @@ import { MatCardModule } from '@angular/material/card';
       </mat-card-content>
     </mat-card>
   `,
-  styles: ``
+  styles: `
+    mat-card {
+      margin: 2rem auto;
+      max-width: 600px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      padding: 1rem;
+    }
+    mat-card-header {
+      text-align: center;
+      justify-content: center;
+    }
+    mat-card-content{
+      padding: 1rem;
+    }
+  `
 })
 export class AddTicket {
   constructor(private ticketService: TicketService, private router: Router) {}

@@ -3,6 +3,7 @@ import { FormBuilder, Validators, ReactiveFormsModule, FormGroup } from '@angula
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButton } from '@angular/material/button';
+import { Router, RouterModule } from '@angular/router';
 import { Ticket } from '../ticket';
 
 @Component({
@@ -12,7 +13,8 @@ import { Ticket } from '../ticket';
     ReactiveFormsModule, 
     MatInputModule, 
     MatFormFieldModule,
-    MatButton
+    MatButton,
+    RouterModule
   ],
   styles: `
     .ticket-form {
@@ -23,6 +25,22 @@ import { Ticket } from '../ticket';
     }
     .mat-mdc-form-field {
       width: 100%;
+      margin-bottom: 1rem;
+    }
+    .mat-error {
+      font-size: 0.75rem;
+      color: #f44336;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+    .button-container {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 1rem;
     }
   `,
   template: `
@@ -34,15 +52,23 @@ import { Ticket } from '../ticket';
           <mat-error> Name must be at least 3 characters long. </mat-error>
         }
       </mat-form-field>
-      <br />
-      <button 
-        mat-raised-button 
-        color="primary" 
-        type="submit" 
-        [disabled]="ticketForm.invalid"
-      >
-        Add Ticket
-      </button>
+      <div class="button-container">
+        <button 
+          mat-raised-button 
+          color="primary" 
+          type="submit" 
+          [disabled]="ticketForm.invalid"
+        >
+          Save Ticket
+        </button>
+        <button 
+          mat-raised-button 
+          type="button"
+          (click)="cancel()"
+        >
+          Cancel
+        </button>
+      </div>
     </form>
   `,
 })
@@ -55,7 +81,7 @@ export class TicketForm {
 
   ticketForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private router: Router) {
     this.ticketForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.minLength(3)]],
     });
@@ -79,6 +105,9 @@ export class TicketForm {
     if (this.ticketForm.valid) {
       this.formSubmitted.emit(this.ticketForm.value as Ticket);
     }
+  }
+  cancel() {
+    this.router.navigate(['/']);
   }
 
 }
