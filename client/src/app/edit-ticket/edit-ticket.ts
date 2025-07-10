@@ -49,7 +49,6 @@ export class EditTicket implements OnInit {
       .updateTicket(this.ticket()._id || '', ticket)
       .subscribe({
         next: () => {
-          alert('Ticket updated successfully');
           this.router.navigate(['/']);
         },
         error: (err) => {

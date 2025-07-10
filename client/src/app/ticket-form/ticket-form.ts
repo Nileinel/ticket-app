@@ -2,6 +2,7 @@ import { Component, effect, EventEmitter, input, Output } from '@angular/core';
 import { FormBuilder, Validators, ReactiveFormsModule, FormGroup } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButton } from '@angular/material/button';
 import { Ticket } from '../ticket';
 
 @Component({
@@ -11,6 +12,7 @@ import { Ticket } from '../ticket';
     ReactiveFormsModule, 
     MatInputModule, 
     MatFormFieldModule,
+    MatButton
   ],
   styles: `
     .ticket-form {
@@ -28,7 +30,9 @@ import { Ticket } from '../ticket';
       <mat-form-field>
         <mat-label>Name</mat-label>
         <input matInput placeholder="Enter ticket name" formControlName="name" required />
-        <mat-error *ngIf="name.invalid"> Name must be at least 3 characters long. </mat-error>
+        @if (name.invalid) {
+          <mat-error> Name must be at least 3 characters long. </mat-error>
+        }
       </mat-form-field>
       <br />
       <button 

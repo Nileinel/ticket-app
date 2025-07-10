@@ -17,6 +17,27 @@ import { MatCardModule } from '@angular/material/card';
           margin-right: 1rem;
         }
       }
+      .mat-mdc-card {
+        margin: 2rem auto;
+        max-width: 800px;
+      }
+      .mat-mdc-card-header {
+        text-align: center;
+      }
+      .mat-mdc-card-title {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+      .mat-mdc-card-content {
+        padding: 1rem;
+      }
+      .mat-mdc-card-actions {
+        display: flex;
+        justify-content: center;
+      }
+      .mat-mdc-card-actions button {
+        margin: 0 0.5rem;
+      }
     `,
   ],
   template:`
@@ -24,6 +45,7 @@ import { MatCardModule } from '@angular/material/card';
       <mat-card-header>
         <mat-card-title>Tickets List</mat-card-title>
       </mat-card-header>
+      <br />
       <mat-card-content>
         <table mat-table [dataSource]="tickets$()">
           <ng-container matColumnDef="col-id">
