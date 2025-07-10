@@ -71,7 +71,7 @@ ticket-app/
 
 ### Known Vulnerabilities and Possible Improvements
 
-1. Monstache authenticated for Elasticsearch using the elastic user (superuser) for ease: Should create a new user with appropriate permissions for Monstache.
+1. Monstache authenticated for Elasticsearch using the elastic user (superuser) for ease: Should create a dedicated user with appropriate permissions for Monstache.
 2. Dockerise frontend for easier deployment.
 3. Add authentication for MongoDB.
 4. Serve frontend via SSL certificates for HTTPS.
