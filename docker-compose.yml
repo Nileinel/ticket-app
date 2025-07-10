@@ -55,7 +55,7 @@ services:
     environment:
       - ELASTICSEARCH_USERNAME=${KIBANA_USERNAME}
       - ELASTICSEARCH_PASSWORD=${KIBANA_PASSWORD}
-      - XPACK_ENCRYPTED_SESSION_KEY=${XPACK_ENCRYPTED_SESSION_KEY}
+      - xpack.encryptedSavedObjects.encryptionKey=${XPACK_ENCRYPTED_SESSION_KEY}
     networks:
       - elk
     volumes: 
