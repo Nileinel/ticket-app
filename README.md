@@ -13,11 +13,7 @@ A demo application for viewing, creating, editing and deleting tickets, built wi
 - **Frontend:** Angular
 - **Backend:** Node.js, Express.js
 - **Database:** MongoDB
-
-## In progress
-
-- **Elasticsearch** integration: search queries
-- **Kibana** dashboard
+- **Indexing & Analytics**: Elasticsearch synced to MongoDB w/ Monstache  + Kibana dashboard
 
 ## Getting Started
 
@@ -71,3 +67,13 @@ ticket-app/
   README.md
   docker-compose.yml
 ```
+## Acknowledgements
+
+### Known Vulnerabilities and Possible Improvements
+
+1. .env committed for replicability: should be avoided.
+2. Monstache authenticated for Elasticsearch using the elastic user (superuser) for ease: Should create a new Monstache user with appropriate permissions.
+3. Better passwords for Elasticsearch and Kibana users for security.
+4. Dockerise frontend for easier deployment.
+5. Add better authentication for MongoDB
+
