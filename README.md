@@ -73,7 +73,9 @@ It was fairly straightforward to pick up Angular and build a quick, responsive a
 
 Using Mongoose was also easy -- it is very well documented and I was able to figure out how to make API calls to MongoDB with it without difficulty. 
 
-Overall, I found MongoDB's official tutorials and documentation on the MEAN stack most helpful while attempting this assignment.
+Overall, I found MongoDB's official tutorials and documentation on the MEAN stack most helpful while developing the app.
+
+I also took some time to automate running the backend on Docker as best as I can, using scripts and docker-compose, to make setup seamless.
 
 ### Challenges
 I struggled syncing the MongoDB database used by the app to Elasticsearch manually. My research revealed a selection of plugins (for Elasticsearch) or river implementations that stream data from MongoDB to Elasticsearch. Of these, I opted to use [Monstache](https://rwynn.github.io/monstache-site/), a sync daemon that continuously indexes MongoDB into Elasticsearch, as it enables real-time syncing, runs on the same Docker container as the Elasticsearch-Kibana-MongoDB stack, and was easy to configure. This way, I was able to get Elasticsearch synced to MongoDB and also have Kibana showing real-time updates on my data for the indexing and search capabilities.
