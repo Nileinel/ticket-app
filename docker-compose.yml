@@ -49,12 +49,13 @@ services:
     build: ./server
     container_name: ticket-app-backend
     ports:
-      - "3333:3333"
+      - "3000:3000"
     depends_on:
       - mongodb
       - elasticsearch
       # - monstache
     environment:
+      - SERVER_PORT=${SERVER_PORT}
       - MONGO_URI=${MONGO_URI}
       - ELASTIC_URI=${ELASTIC_URI}
     volumes:

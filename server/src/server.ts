@@ -15,14 +15,18 @@ if (!MONGO_URI) {
 
 connectToDatabase(MONGO_URI).then(() => {
     const app = express();
-    const PORT = process.env.PORT || 3000;
+    const { SERVER_PORT } = process.env;
+    if (!SERVER_PORT) {
+        console.error('Server port is not defined in the environment variables.');
+        process.exit(1);
+    };
 
     app.use(cors());
     app.use(express.json());
 
     app.use('/tickets', ticketRouter);
 
-    app.listen(PORT, () => {
+    app.listen(SERVER_PORT, () => {
         console.log(`Server is running on http://localhost:${PORT}`);
     });
 }).catch((error: any) => {

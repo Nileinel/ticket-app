@@ -6,7 +6,7 @@ import { Ticket } from './ticket';
   providedIn: 'root'
 })
 export class TicketService {
-  private url = 'http://localhost:3333';
+  private url = 'http://localhost:3000';
   tickets$ = signal<Ticket[]>([]);
   ticket$ = signal<Ticket>({} as Ticket);
 
