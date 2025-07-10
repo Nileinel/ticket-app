@@ -2,6 +2,8 @@
 
 A demo application for viewing, creating and editing tickets, built with the MEAN stack (MongoDB, Express.js, Angular, Node.js).
 
+<img width="812" height="432" alt="Image" src="https://github.com/user-attachments/assets/ef1a470b-f486-48f2-94f2-a17fd9c35b13" />
+
 ## Features
 
 - Create, view, update, and delete tickets
