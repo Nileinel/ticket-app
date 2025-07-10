@@ -22,7 +22,8 @@ import { MatCardModule } from '@angular/material/card';
         max-width: 800px;
       }
       .mat-mdc-card-header {
-        text-align: center;
+        display: flex;
+        justify-content: center;
       }
       .mat-mdc-card-title {
         font-size: 1.5rem;
@@ -42,6 +43,7 @@ import { MatCardModule } from '@angular/material/card';
   ],
   template:`
     <mat-card>
+      <br />
       <mat-card-header>
         <mat-card-title>Tickets List</mat-card-title>
       </mat-card-header>
