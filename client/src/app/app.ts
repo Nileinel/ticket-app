@@ -14,12 +14,16 @@ import { MatToolbarModule } from '@angular/material/toolbar';
         justify-content: center;
         padding: 2rem 4rem;
       }
+      mat-toolbar {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
     `,
   ],
   template: 
   `
     <mat-toolbar color="primary">
-      <span>Ticket Management App</span>
+      <span>MyTicket</span>
     </mat-toolbar>
     <main>
       <router-outlet></router-outlet>
