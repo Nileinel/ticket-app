@@ -78,12 +78,13 @@ Overall, I found MongoDB's official tutorials and documentation on the MEAN stac
 I also took some time to automate running the backend on Docker as best as I can, using scripts and docker-compose, to make setup seamless.
 
 ### Challenges
-I struggled syncing the MongoDB database used by the app to Elasticsearch manually. My research revealed a selection of plugins (for Elasticsearch) or river implementations that stream data from MongoDB to Elasticsearch. Of these, I opted to use [Monstache](https://rwynn.github.io/monstache-site/), a sync daemon that continuously indexes MongoDB into Elasticsearch, as it enables real-time syncing, runs on the same Docker container as the Elasticsearch-Kibana-MongoDB stack, and was easy to configure. This way, I was able to get Elasticsearch synced to MongoDB and also have Kibana showing real-time updates on my data for the indexing and search capabilities.
+I struggled syncing the MongoDB database used by the app to Elasticsearch manually. My research revealed a selection of plugins (for Elasticsearch) or river implementations that stream data from MongoDB to Elasticsearch. Because I couldn't get this integration working manually, I opted to use [Monstache](https://rwynn.github.io/monstache-site/), a sync daemon that continuously indexes MongoDB into Elasticsearch, as it enables real-time syncing, runs on the same Docker container as the Elasticsearch-Kibana-MongoDB stack, and was easy to configure. This way, I was able to get Elasticsearch synced to MongoDB and also have Kibana showing real-time updates on my data for the indexing and search capabilities. 
 
 ### Known Vulnerabilities and Possible Improvements
 
 1. Monstache authenticated for Elasticsearch using the elastic user (superuser) for ease: Should create a dedicated user with appropriate permissions for Monstache.
-2. Dockerise frontend for easier deployment.
-3. Add authentication for MongoDB.
-4. Serve frontend via SSL certificates for HTTPS.
+2. Latency introduced by Monstache daemon: it may take some time for changes on MongoDB to reflect on Elasticsearch + Kibana (especially in larger scale). Potential for better / more scalable solutions. 
+3.  Dockerise frontend for easier deployment.
+4. Add authentication for MongoDB.
+5. Serve frontend via SSL certificates for HTTPS.
 
